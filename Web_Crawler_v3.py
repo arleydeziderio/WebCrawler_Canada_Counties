@@ -25,8 +25,14 @@ def get_data_from_webpage(url):
     # It may be necessary to adapt depending on the page structure
     data = []
 
+    # Searching for the table that contains the informations
+    table = soup.find('table', {'class': 'table table-bordered'})
+
     # Supposing that the table has lines <tr> with <td> for the columns
-    for row in soup.find_all('tr'): # For each line of the table
+    if table:
+        rows = table.find_all('tr')
+
+    for row in rows[1:]: # For each line of the table
         cols = row.find_all('td') # Finding the line cells
         if len(cols) > 0: # Making sure that there's data
             order = cols[0].get_text(strip=True)

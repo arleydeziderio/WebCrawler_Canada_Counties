@@ -34,7 +34,6 @@ def get_data_from_webpage(url):
             country = cols[2].get_text(strip=True)
             latitude = cols[3].get_text(strip=True)
             longitudee = cols[4].get_text(strip=True)
-            #x = cols[5].get_text(strip=True)
 
             # Adding data into the list
             data.append([order, county_name, country, latitude, longitudee])
