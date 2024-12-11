@@ -49,4 +49,4 @@ df = pd.DataFrame(data, columns=["Order", "County_Name", "Country", "Latitude", 
 print(df)
 
 # Importing to CSV
-# df.to_csv('Canadian_County_Data.csv', index=False)
+df.to_csv('Canadian_County_Data.csv', index=False)
