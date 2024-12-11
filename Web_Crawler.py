@@ -24,12 +24,15 @@ def get_data_from_webpage(url):
     for row in soup.find_all('tr'): # For each line of the table
         cols = row.find_all('td') # Finding the line cells
         if len(cols) > 0: # Making sure that there's data
-            name = cols[0].get_text(strip=True)
-            latitude = cols[1].get_text(strip=True)
-            longitudee = cols[2].get_text(strip=True)
+            order = cols[0].get_text(strip=True)
+            county_name = cols[1].get_text(strip=True)
+            country = cols[2].get_text(strip=True)
+            latitude = cols[3].get_text(strip=True)
+            longitudee = cols[4].get_text(strip=True)
+            #x = cols[5].get_text(strip=True)
 
             # Adding data into the list
-            data.append([name, latitude, longitudee])
+            data.append([order, county_name, country, latitude, longitudee])
 
     return data
 
@@ -40,7 +43,7 @@ url = 'https://geokeo.com/database/county/ca/1/'
 data = get_data_from_webpage(url)
 
 # Converting data into a Pandas DataFrame
-df = pd.DataFrame(data, columns=["Name", "Latitude", "Longitude"])
+df = pd.DataFrame(data, columns=["Order", "County_Name", "Country", "Latitude", "Longitude"])
 
 # Extracting data
 print(df)
