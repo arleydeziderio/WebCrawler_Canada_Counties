@@ -41,14 +41,33 @@ def get_data_from_webpage(url):
 
     return data
 
-# Page URL for Scraping
-url = 'https://geokeo.com/database/county/ca/1/'
+# Function to retreive the data from multiple pages and consolidate into a single DataFrame
+def scrape_all_pages(start_page, end_page):
+    all_data = []
 
-# Retrieving data
-data = get_data_from_webpage(url)
+    for page_num in range(start_page, end_page + 1):
+        # Page URL for Scraping
+        url = 'https://geokeo.com/database/county/ca/{page_nume}/'
+        print(f"Retrieving data from page # {page_num} ...")
+
+        # Retrieving data
+        page_data = get_data_from_webpage(url)
+
+        if page_data:
+            all_data.extend(page_data)
+
+        # Adds a break to avoid server overload
+        time.sleep(1)
+    
+    return all_data
+
+# Scraping pages 1 through 22
+start_page = 1
+end_page = 22
+all_data = scrape_all_pages(start_page, end_page)
 
 # Converting data into a Pandas DataFrame
-df = pd.DataFrame(data, columns=["Order", "County_Name", "Country", "Latitude", "Longitude"])
+df = pd.DataFrame(all_data, columns=["Order", "County_Name", "Country", "Latitude", "Longitude"])
 
 # Extracting data
 print(df)
