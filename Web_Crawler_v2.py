@@ -47,7 +47,7 @@ def scrape_all_pages(start_page, end_page):
 
     for page_num in range(start_page, end_page + 1):
         # Page URL for Scraping
-        url = 'https://geokeo.com/database/county/ca/{page_nume}/'
+        url = f'https://geokeo.com/database/county/ca/{page_num}/'
         print(f"Retrieving data from page # {page_num} ...")
 
         # Retrieving data
@@ -73,4 +73,6 @@ df = pd.DataFrame(all_data, columns=["Order", "County_Name", "Country", "Latitud
 print(df)
 
 # Importing to CSV
-# df.to_csv('Canadian_County_Data.csv', index=False)
+df.to_csv('Canadian_County_Data.csv', index=False)
+
+print(f"Data saved into 'Canadian_County_Data.csv'")
